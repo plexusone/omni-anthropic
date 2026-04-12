@@ -77,8 +77,8 @@ func (p *Provider) Capabilities() core.Capabilities {
 		Tools:             true,
 		Streaming:         true,
 		Vision:            true,
-		JSON:              false, // Anthropic doesn't have a JSON mode like OpenAI
-		SystemRole:        true,  // Handled via separate system field
+		JSON:              false,  // Anthropic doesn't have a JSON mode like OpenAI
+		SystemRole:        true,   // Handled via separate system field
 		MaxContextWindow:  200000, // Claude 3 models
 		SupportsMaxTokens: true,
 	}
@@ -297,7 +297,7 @@ func (p *Provider) convertResponse(resp *anthropic.Message) *core.ChatCompletion
 		ID:      resp.ID,
 		Object:  "chat.completion",
 		Created: time.Now().Unix(),
-		Model:   string(resp.Model),
+		Model:   resp.Model,
 		Usage: core.Usage{
 			PromptTokens:     int(resp.Usage.InputTokens),
 			CompletionTokens: int(resp.Usage.OutputTokens),
@@ -407,7 +407,7 @@ func (s *streamAdapter) convertEvent(event anthropic.MessageStreamEventUnion) *c
 		// Store message metadata for future chunks
 		if msg := event.AsMessageStart(); msg.Message.ID != "" {
 			s.messageID = msg.Message.ID
-			s.model = string(msg.Message.Model)
+			s.model = msg.Message.Model
 			result.ID = s.messageID
 			result.Model = s.model
 		}
