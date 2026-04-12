@@ -1,0 +1,42 @@
+{
+  "irVersion": "1.0",
+  "project": "omnillm-anthropic",
+  "repository": "https://github.com/plexusone/omnillm-anthropic",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "releases": [
+    {
+      "version": "v0.1.0",
+      "date": "2026-04-12",
+      "highlights": [
+        { "description": "Initial release of Anthropic thick provider for OmniLLM" },
+        { "description": "Full chat completion and streaming support using official anthropic-sdk-go" },
+        { "description": "Tool/function calling support" }
+      ],
+      "added": [
+        { "description": "Anthropic thick provider using official `anthropic-sdk-go` SDK", "commit": "2490382" },
+        { "description": "Auto-registration via `init()` with priority override", "commit": "2490382" },
+        { "description": "Streaming support via `CreateChatCompletionStream`", "commit": "2490382" },
+        { "description": "Tool/function calling support", "commit": "2490382" },
+        { "description": "Conformance tests using `providertest` framework", "commit": "738bb0e" }
+      ],
+      "documentation": [
+        { "description": "Package documentation with usage examples", "commit": "fb7b5f3" },
+        { "description": "README with feature support table", "commit": "47d6ba8" },
+        { "description": "Release notes for v0.1.0", "commit": "9aa06c2" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/anthropics/anthropic-sdk-go` v1.35.0", "commit": "42948e8" },
+        { "description": "`github.com/plexusone/omnillm-core` v0.15.0", "commit": "b20a46f" }
+      ],
+      "internal": [
+        { "description": "Initialize module", "commit": "b20a46f" },
+        { "description": "Add shared CI workflows", "commit": "f8f34d0" },
+        { "description": "Add LICENSE file", "commit": "887d7c2" }
+      ],
+      "fixed": [
+        { "description": "Various golangci-lint fixes", "commit": "eba3279" }
+      ]
+    }
+  ]
+}
