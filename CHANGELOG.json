@@ -1,10 +1,25 @@
 {
   "irVersion": "1.0",
-  "project": "omnillm-anthropic",
-  "repository": "https://github.com/plexusone/omnillm-anthropic",
+  "project": "omni-anthropic",
+  "repository": "https://github.com/plexusone/omni-anthropic",
   "versioning": "semver",
   "commitConvention": "conventional",
   "releases": [
+    {
+      "version": "v0.2.0",
+      "date": "2026-04-25",
+      "highlights": [
+        { "description": "Renamed module from omnillm-anthropic to omni-anthropic" },
+        { "description": "Restructured to omni-anthropic/omnillm/ pattern matching other provider modules" }
+      ],
+      "changed": [
+        { "description": "Rename module from `github.com/plexusone/omnillm-anthropic` to `github.com/plexusone/omni-anthropic`" },
+        { "description": "Move provider code to `omnillm/` subdirectory" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/anthropics/anthropic-sdk-go` v1.38.0 (was v1.35.0)" }
+      ]
+    },
     {
       "version": "v0.1.0",
       "date": "2026-04-12",
