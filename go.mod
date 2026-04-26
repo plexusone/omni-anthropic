@@ -1,4 +1,4 @@
-module github.com/plexusone/omnillm-anthropic
+module github.com/plexusone/omni-anthropic
 
 go 1.26.0
 
@@ -10,10 +10,10 @@ require (
 require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/buger/jsonparser v1.1.2 // indirect
-	github.com/grokify/mogo v0.74.1 // indirect
+	github.com/grokify/mogo v0.74.2 // indirect
 	github.com/grokify/sogo v0.14.0 // indirect
 	github.com/invopop/jsonschema v0.13.0 // indirect
-	github.com/mailru/easyjson v0.7.7 // indirect
+	github.com/mailru/easyjson v0.9.2 // indirect
 	github.com/tidwall/gjson v1.18.0 // indirect
 	github.com/tidwall/match v1.2.0 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect

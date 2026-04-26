@@ -16,7 +16,7 @@
 //
 //	import (
 //	    core "github.com/plexusone/omnillm-core"
-//	    "github.com/plexusone/omnillm-anthropic"
+//	    "github.com/plexusone/omni-anthropic/omnillm"
 //	)
 //
 //	func main() {
