@@ -3,7 +3,7 @@ module github.com/plexusone/omni-anthropic
 go 1.26.0
 
 require (
-	github.com/anthropics/anthropic-sdk-go v1.41.0
+	github.com/anthropics/anthropic-sdk-go v1.43.0
 	github.com/plexusone/omnillm-core v0.15.0
 )
 
@@ -14,7 +14,7 @@ require (
 	github.com/grokify/sogo v0.14.0 // indirect
 	github.com/invopop/jsonschema v0.13.0 // indirect
 	github.com/mailru/easyjson v0.9.2 // indirect
-	github.com/standard-webhooks/standard-webhooks/libraries v0.0.0-20260427160145-3afa6683f8b2 // indirect
+	github.com/standard-webhooks/standard-webhooks/libraries v0.0.1 // indirect
 	github.com/tidwall/gjson v1.18.0 // indirect
 	github.com/tidwall/match v1.2.0 // indirect
 	github.com/tidwall/pretty v1.2.1 // indirect
