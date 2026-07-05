@@ -52,7 +52,53 @@ client, _ := omnillm.NewClient(omnillm.ClientConfig{
 | Streaming | Yes |
 | Tool Calling | Yes |
 | System Messages | Yes |
+| Extended Thinking | Yes |
 | JSON Mode | No |
+
+## Extended Thinking
+
+Anthropic Claude models support extended thinking for complex reasoning tasks:
+
+```go
+import omnillm "github.com/plexusone/omnillm-core"
+
+// Using Anthropic-style Thinking config (native)
+budget := int64(8192)
+response, err := client.CreateChatCompletion(ctx, &omnillm.ChatCompletionRequest{
+    Model: "claude-sonnet-4-20250514",
+    Thinking: &omnillm.ThinkingConfig{
+        Type:         omnillm.ThinkingTypeEnabled,
+        BudgetTokens: &budget,
+    },
+    Messages: messages,
+})
+
+// Or use ReasoningEffort for cross-provider compatibility
+effort := omnillm.ReasoningEffortHigh
+response, err := client.CreateChatCompletion(ctx, &omnillm.ChatCompletionRequest{
+    Model:           "claude-sonnet-4-20250514",
+    ReasoningEffort: &effort,
+    Messages:        messages,
+})
+```
+
+### ThinkingType Values
+
+| Value | Description |
+|-------|-------------|
+| `omnillm.ThinkingTypeEnabled` | Enable thinking with explicit budget |
+| `omnillm.ThinkingTypeDisabled` | Disable thinking |
+| `omnillm.ThinkingTypeAdaptive` | Let the model decide |
+
+### ReasoningEffort Mapping
+
+| ReasoningEffort | Anthropic Behavior |
+|-----------------|-------------------|
+| `"none"` | Thinking disabled |
+| `"low"`, `"medium"` | Adaptive thinking |
+| `"high"` | Enabled with budget from MaxTokens |
+
+See [Reasoning Feature Guide](https://github.com/plexusone/omnillm-core/blob/main/docs/features/reasoning.md) for details.
 
 ## Configuration
 
