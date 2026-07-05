@@ -6,6 +6,29 @@
   "commitConvention": "conventional",
   "releases": [
     {
+      "version": "v0.3.0",
+      "date": "2026-07-05",
+      "highlights": [
+        { "description": "**Extended Thinking**: Native support for Anthropic extended thinking with ThinkingConfig" },
+        { "description": "**Cross-Provider Reasoning**: ReasoningEffort mapping to Anthropic thinking modes" }
+      ],
+      "added": [
+        { "description": "[omnillm] `ThinkingConfig` support with enabled/disabled/adaptive modes", "commit": "edc4605" },
+        { "description": "[omnillm] `ReasoningEffort` mapping to Anthropic extended thinking", "commit": "edc4605" },
+        { "description": "[omnillm] Automatic thinking budget calculation from max_tokens", "commit": "edc4605" }
+      ],
+      "tests": [
+        { "description": "[omnillm] Unit tests for ThinkingConfig conversion and budget calculation", "commit": "399ca70" },
+        { "description": "[omnillm] Integration tests with claude-sonnet-4-6 (requires API key)", "commit": "399ca70" }
+      ],
+      "documentation": [
+        { "description": "Extended Thinking section in README with usage examples", "commit": "f92e709" }
+      ],
+      "dependencies": [
+        { "description": "`github.com/plexusone/omnillm-core` v0.17.0 → v0.18.0", "commit": "2d85ebe" }
+      ]
+    },
+    {
       "version": "v0.2.0",
       "date": "2026-04-25",
       "highlights": [
