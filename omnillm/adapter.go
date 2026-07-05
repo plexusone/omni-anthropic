@@ -158,7 +158,68 @@ func (p *Provider) buildParams(req *core.ChatCompletionRequest) anthropic.Messag
 		params.ToolChoice = p.convertToolChoice(req.ToolChoice)
 	}
 
+	// Thinking configuration
+	// Prefer explicit Thinking config, fall back to mapping from ReasoningEffort
+	if req.Thinking != nil {
+		params.Thinking = p.convertThinkingConfig(req.Thinking, req.MaxTokens)
+	} else if req.ReasoningEffort != nil {
+		params.Thinking = p.mapReasoningEffortToThinking(*req.ReasoningEffort, req.MaxTokens)
+	}
+
 	return params
+}
+
+// convertThinkingConfig converts core ThinkingConfig to Anthropic format.
+func (p *Provider) convertThinkingConfig(cfg *core.ThinkingConfig, _ *int) anthropic.ThinkingConfigParamUnion {
+	switch cfg.Type {
+	case core.ThinkingTypeDisabled:
+		return anthropic.ThinkingConfigParamUnion{
+			OfDisabled: &anthropic.ThinkingConfigDisabledParam{},
+		}
+	case core.ThinkingTypeAdaptive:
+		return anthropic.ThinkingConfigParamUnion{
+			OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
+		}
+	case core.ThinkingTypeEnabled:
+		budgetTokens := int64(8192) // Default budget
+		if cfg.BudgetTokens != nil {
+			budgetTokens = *cfg.BudgetTokens
+		}
+		return anthropic.ThinkingConfigParamOfEnabled(budgetTokens)
+	default:
+		// Unknown type, return adaptive as safe default
+		return anthropic.ThinkingConfigParamUnion{
+			OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
+		}
+	}
+}
+
+// mapReasoningEffortToThinking maps OpenAI-style reasoning_effort to Anthropic Thinking config.
+func (p *Provider) mapReasoningEffortToThinking(effort string, maxTokens *int) anthropic.ThinkingConfigParamUnion {
+	switch effort {
+	case core.ReasoningEffortNone:
+		return anthropic.ThinkingConfigParamUnion{
+			OfDisabled: &anthropic.ThinkingConfigDisabledParam{},
+		}
+	case core.ReasoningEffortLow, core.ReasoningEffortMedium:
+		// Low and medium map to adaptive - let the model decide
+		return anthropic.ThinkingConfigParamUnion{
+			OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
+		}
+	case core.ReasoningEffortHigh:
+		// High maps to enabled with a reasonable default budget
+		// Use 25% of max_tokens or 8192, whichever is larger
+		budgetTokens := int64(8192)
+		if maxTokens != nil && int64(*maxTokens)/4 > budgetTokens {
+			budgetTokens = int64(*maxTokens) / 4
+		}
+		return anthropic.ThinkingConfigParamOfEnabled(budgetTokens)
+	default:
+		// Unknown effort, return adaptive as safe default
+		return anthropic.ThinkingConfigParamUnion{
+			OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
+		}
+	}
 }
 
 // convertMessages converts core messages to Anthropic message params.
