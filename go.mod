@@ -3,7 +3,7 @@ module github.com/plexusone/omni-anthropic
 go 1.26.0
 
 require (
-	github.com/anthropics/anthropic-sdk-go v1.73.0
+	github.com/anthropics/anthropic-sdk-go v1.75.0
 	github.com/plexusone/omnillm-core v0.18.0
 )
 
