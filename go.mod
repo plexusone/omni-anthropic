@@ -4,13 +4,13 @@ go 1.26.0
 
 require (
 	github.com/anthropics/anthropic-sdk-go v1.78.0
-	github.com/plexusone/omnillm-core v0.18.0
+	github.com/plexusone/omnillm-core v0.18.1
 )
 
 require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
 	github.com/buger/jsonparser v1.2.0 // indirect
-	github.com/grokify/mogo v0.74.6 // indirect
+	github.com/grokify/mogo v0.75.0 // indirect
 	github.com/grokify/sogo v0.15.0 // indirect
 	github.com/invopop/jsonschema v0.14.0 // indirect
 	github.com/pb33f/ordered-map/v2 v2.3.1 // indirect
